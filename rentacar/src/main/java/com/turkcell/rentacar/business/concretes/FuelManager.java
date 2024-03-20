@@ -4,6 +4,7 @@ import com.turkcell.rentacar.business.abstracts.FuelService;
 import com.turkcell.rentacar.business.dtos.requests.CreateFuelRequest;
 import com.turkcell.rentacar.business.dtos.requests.UpdateFuelRequest;
 import com.turkcell.rentacar.business.dtos.responses.*;
+import com.turkcell.rentacar.business.rules.FuelBusinessRules;
 import com.turkcell.rentacar.core.utilities.mapping.ModelMapperService;
 import com.turkcell.rentacar.dataAccess.abstracts.FuelRepository;
 import com.turkcell.rentacar.entities.concretes.Brand;
@@ -21,9 +22,11 @@ public class FuelManager implements FuelService {
 
     private FuelRepository fuelRepository;
     private ModelMapperService modelMapperService;
+    private FuelBusinessRules fuelBusinessRules;
 
     @Override
     public CreatedFuelResponse add(CreateFuelRequest createFuelRequest) {
+        fuelBusinessRules.fuelNameCannotBeDuplicated(createFuelRequest.getName());
         Fuel fuel = this.modelMapperService.forRequest().map(createFuelRequest, Fuel.class);
         fuel.setCreateDate(LocalDateTime.now());
 
@@ -45,21 +48,17 @@ public class FuelManager implements FuelService {
 
     @Override
     public GotFuelResponse getById(int id) {
+        fuelBusinessRules.fuelMustExists(id);
         Fuel fuel = fuelRepository.findById(id).orElse(null);
-        if (fuel == null) return null;
         return this.modelMapperService.forResponse().map(fuel, GotFuelResponse.class);
     }
 
     @Override
     public UpdatedFuelResponse update(UpdateFuelRequest updateFuelRequest) {
+        fuelBusinessRules.fuelMustExists(updateFuelRequest.getId());
         Fuel fuel = this.modelMapperService.forRequest().map(updateFuelRequest, Fuel.class);
         fuel.setUpdateDate(LocalDateTime.now());
-        Fuel updatedFuel = fuelRepository.findById(fuel.getId()).orElse(null);
-        if (updatedFuel == null) {
-            return null;
-        }
-
-        updatedFuel = fuelRepository.save(fuel);
+        Fuel updatedFuel = fuelRepository.save(fuel);
         UpdatedFuelResponse updatedFuelResponse = this.modelMapperService.forResponse().map(updatedFuel, UpdatedFuelResponse.class);
         updatedFuelResponse.setUpdatedDate(updatedFuel.getUpdateDate());
         return updatedFuelResponse;
@@ -67,6 +66,7 @@ public class FuelManager implements FuelService {
 
     @Override
     public void delete(int id) {
+        fuelBusinessRules.fuelMustExists(id);
         fuelRepository.deleteById(id);
     }
 

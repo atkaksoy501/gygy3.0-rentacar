@@ -19,4 +19,11 @@ public class BrandBusinessRules {
             throw new BusinessException("BrandExists");
         }
     }
+
+    public void brandMustExists(int brandId) {
+        Optional<Brand> brand = brandRepository.findById(brandId);
+        if (!brand.isPresent()) {
+            throw new BusinessException("BrandNotExists");
+        }
+    }
 }

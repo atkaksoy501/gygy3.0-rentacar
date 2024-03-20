@@ -52,21 +52,17 @@ public class BrandManager implements BrandService {
 
     @Override
     public GotBrandResponse getById(int id) {
+        brandBusinessRules.brandMustExists(id);
         Brand brand = brandRepository.findById(id).orElse(null);
-        if (brand == null) return null;
         return this.modelMapperService.forResponse().map(brand, GotBrandResponse.class);
     }
 
     @Override
     public UpdatedBrandResponse update(UpdateBrandRequest updateBrandRequest) {
+        brandBusinessRules.brandMustExists(updateBrandRequest.getId());
         Brand brand = this.modelMapperService.forRequest().map(updateBrandRequest, Brand.class);
         brand.setUpdateDate(LocalDateTime.now());
-        Brand updatedBrand = brandRepository.findById(brand.getId()).orElse(null);
-        if (updatedBrand == null) {
-            return null;
-        }
-
-        updatedBrand = brandRepository.save(brand);
+        Brand updatedBrand = brandRepository.save(brand);
         UpdatedBrandResponse updatedBrandResponse = this.modelMapperService.forResponse().map(updatedBrand, UpdatedBrandResponse.class);
         updatedBrandResponse.setUpdatedDate(updatedBrand.getUpdateDate());
         return updatedBrandResponse;
@@ -74,6 +70,7 @@ public class BrandManager implements BrandService {
 
     @Override
     public void delete(int id) {
+        brandBusinessRules.brandMustExists(id);
         brandRepository.deleteById(id);
     }
 }
