@@ -5,6 +5,7 @@ import com.turkcell.rentacar.business.dtos.requests.CreateCarRequest;
 import com.turkcell.rentacar.business.dtos.responses.CreatedCarResponse;
 import com.turkcell.rentacar.business.dtos.responses.GotCarResponse;
 import com.turkcell.rentacar.entities.concretes.Car;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class CarsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreatedCarResponse add(@RequestBody CreateCarRequest car) {
+    public CreatedCarResponse add(@Valid @RequestBody CreateCarRequest car) {
         return carService.add(car);
     }
 

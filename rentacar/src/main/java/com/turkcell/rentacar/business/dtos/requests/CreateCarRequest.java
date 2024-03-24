@@ -19,7 +19,6 @@ public class CreateCarRequest {
     private String name;
 
     @NotNull
-    @Size(min = 4, max = 4)
     private int modelYear;
 
     @NotNull
@@ -27,6 +26,5 @@ public class CreateCarRequest {
     private String plate;
 
     @NotNull
-    @Size(min = 2, max = 5)
     private double dailyPrice;
 }

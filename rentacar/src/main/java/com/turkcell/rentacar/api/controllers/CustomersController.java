@@ -23,13 +23,13 @@ public class CustomersController {
     private IndividualCustomerService individualCustomerService;
     @PostMapping("/business")
     @ResponseStatus(HttpStatus.CREATED)
-    public CreatedBusinessCustomerResponse add(@RequestBody CreateBusinessCustomerRequest businessCustomer) {
+    public CreatedBusinessCustomerResponse add(@Valid @RequestBody CreateBusinessCustomerRequest businessCustomer) {
         return businessCustomerService.add(businessCustomer);
     }
 
     @PostMapping("/individual")
     @ResponseStatus(HttpStatus.CREATED)
-    public CreatedIndividualCustomerResponse add(@RequestBody CreateIndividualCustomerRequest individualCustomer) {
+    public CreatedIndividualCustomerResponse add(@Valid @RequestBody CreateIndividualCustomerRequest individualCustomer) {
         return individualCustomerService.add(individualCustomer);
     }
 }

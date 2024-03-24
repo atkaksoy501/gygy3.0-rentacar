@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -19,7 +20,7 @@ public class Rental extends BaseEntity {
 
     private LocalDateTime dateRented;
 
-    private LocalDateTime dateReturned;
+    private LocalDate dateReturned;
 
     @ManyToOne
     @JoinColumn(name="carId")

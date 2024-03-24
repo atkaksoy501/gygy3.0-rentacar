@@ -8,6 +8,7 @@ import com.turkcell.rentacar.business.rules.MaintenanceBusinessRules;
 import com.turkcell.rentacar.business.rules.RentalBusinessRules;
 import com.turkcell.rentacar.entities.concretes.Car;
 import com.turkcell.rentacar.entities.concretes.Maintenance;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class MaintenancesController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreatedMaintenanceResponse add(@RequestBody CreateMaintenanceRequest createMaintenanceRequest) {
+    public CreatedMaintenanceResponse add(@Valid @RequestBody CreateMaintenanceRequest createMaintenanceRequest) {
 
         return maintenanceService.sentToMaintenance(createMaintenanceRequest);
     }

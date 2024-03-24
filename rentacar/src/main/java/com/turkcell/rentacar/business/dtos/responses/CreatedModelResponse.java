@@ -22,8 +22,8 @@ public class CreatedModelResponse {
     private int id;
     private String name;
     private LocalDateTime createDate;
-    private Brand brand;
-    private Fuel fuel;
-    private Transmission transmission;
+    private GotBrandResponse brand;
+    private GotFuelResponse fuel;
+    private GotTransmissionResponse transmission;
     private int requiredFindexScore;
 }

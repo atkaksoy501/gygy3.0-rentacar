@@ -20,9 +20,9 @@ import java.util.List;
 public class GotModelResponse {
     private int id;
     private String name;
-    private Brand brand;
-    private Fuel fuel;
-    private Transmission transmission;
+    private GotBrandResponse brand;
+    private GotFuelResponse fuel;
+    private GotTransmissionResponse transmission;
     private List<Car> cars;
     private int requiredFindexScore;
 }

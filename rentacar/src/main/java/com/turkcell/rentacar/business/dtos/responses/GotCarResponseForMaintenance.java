@@ -1,11 +1,7 @@
 package com.turkcell.rentacar.business.dtos.responses;
 
 import com.turkcell.rentacar.entities.concretes.Maintenance;
-import com.turkcell.rentacar.entities.concretes.Model;
 import com.turkcell.rentacar.entities.concretes.enums.CarStatus;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class GotCarResponse {
+public class GotCarResponseForMaintenance {
     private int id;
 
     private GotModelResponseForCar model;
@@ -30,8 +26,6 @@ public class GotCarResponse {
     private String plate;
 
     private double dailyPrice;
-
-    private List<Maintenance> maintenances;
 
     private LocalDateTime createDate;
 }

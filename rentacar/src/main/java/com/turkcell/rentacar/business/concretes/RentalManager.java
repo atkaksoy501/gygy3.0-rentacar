@@ -19,6 +19,8 @@ import com.turkcell.rentacar.entities.concretes.IndividualCustomer;
 import com.turkcell.rentacar.entities.concretes.Rental;
 import com.turkcell.rentacar.entities.concretes.enums.CarStatus;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -57,15 +59,18 @@ public class RentalManager implements RentalService {
     }
 
     private CreatedRentalResponse getCreatedRentalResponse(CreateRentalRequest rental, String identityNo, Customer customer) {
-        Car car = modelMapperService.forResponse()
-                .map(carService.getById(rental.getCarId()), Car.class);
-        car.setStatus(CarStatus.RENTAL);
-        carService.updateCarStatus(car);
+//        Car car = modelMapperService.forResponse()
+//                .map(carService.getById(rental.getCarId()), Car.class);
+        ModelMapper modelMapper = new ModelMapper(); //upper method assignes "createDate" variable to all dates.
+        Car car = modelMapper.map(carService.getById(rental.getCarId()), Car.class);
         findexBusinessRules.findexScoreMustEnough(identityNo, car.getModel().getRequiredFindexScore());
         Rental dbRental = modelMapperService.forRequest().map(rental, Rental.class);
+        car.setStatus(CarStatus.RENTAL);
+        carService.updateCarStatus(car);
         dbRental.setCar(car);
         dbRental.setCreateDate(LocalDateTime.now());
         dbRental.setDateRented(LocalDateTime.now());
+        dbRental.setDateReturned(rental.getReturnDate());
         dbRental.setCustomer(customer);
         return modelMapperService.forResponse().map(rentalRepository.save(dbRental), CreatedRentalResponse.class);
     }

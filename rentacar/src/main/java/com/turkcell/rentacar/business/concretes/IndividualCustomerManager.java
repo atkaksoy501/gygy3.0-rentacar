@@ -4,6 +4,7 @@ import com.turkcell.rentacar.business.abstracts.IndividualCustomerService;
 import com.turkcell.rentacar.business.dtos.requests.CreateIndividualCustomerRequest;
 import com.turkcell.rentacar.business.dtos.responses.CreatedIndividualCustomerResponse;
 import com.turkcell.rentacar.business.dtos.responses.GotIndividualCustomerResponse;
+import com.turkcell.rentacar.business.rules.IndividualCustomerBusinessRules;
 import com.turkcell.rentacar.core.utilities.mapping.ModelMapperService;
 import com.turkcell.rentacar.dataAccess.abstracts.IndividualCustomerRepository;
 import com.turkcell.rentacar.entities.concretes.IndividualCustomer;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 public class IndividualCustomerManager implements IndividualCustomerService {
     private IndividualCustomerRepository individualCustomerRepository;
     private ModelMapperService modelMapperService;
+    private IndividualCustomerBusinessRules individualCustomerBusinessRules;
     @Override
     public CreatedIndividualCustomerResponse add(CreateIndividualCustomerRequest customer) {
         IndividualCustomer individualCustomer = modelMapperService.forRequest().map(customer, IndividualCustomer.class);
@@ -27,6 +29,7 @@ public class IndividualCustomerManager implements IndividualCustomerService {
 
     @Override
     public GotIndividualCustomerResponse getById(int id) {
+        individualCustomerBusinessRules.individualCustomerMustExists(id);
         IndividualCustomer individualCustomer = individualCustomerRepository.findById(id).orElse(null);
         return modelMapperService.forResponse().map(individualCustomer, GotIndividualCustomerResponse.class);
     }

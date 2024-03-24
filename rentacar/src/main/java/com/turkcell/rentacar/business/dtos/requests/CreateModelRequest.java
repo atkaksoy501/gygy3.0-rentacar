@@ -24,6 +24,5 @@ public class CreateModelRequest {
     private int transmissionId;
 
     @NotNull
-    @Size(min = 4, max = 4)
     private int requiredFindexScore;
 }

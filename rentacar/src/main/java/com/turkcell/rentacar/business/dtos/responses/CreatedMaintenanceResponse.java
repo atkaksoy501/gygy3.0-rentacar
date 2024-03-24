@@ -17,6 +17,7 @@ public class CreatedMaintenanceResponse {
 
     private LocalDateTime dateSent;
 
-    private Car car;
+    private GotCarResponseForMaintenance car;
+
     private LocalDateTime createDate;
 }

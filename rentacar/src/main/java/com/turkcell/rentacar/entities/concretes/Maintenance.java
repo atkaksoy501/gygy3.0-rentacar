@@ -18,10 +18,6 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "maintenances")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id",
-        scope = Maintenance.class)
 public class Maintenance extends BaseEntity {
     private LocalDateTime dateSent;
 

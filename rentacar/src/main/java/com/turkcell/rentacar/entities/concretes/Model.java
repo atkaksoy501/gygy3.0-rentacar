@@ -16,27 +16,20 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "models")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id",
-        scope = Model.class)
 public class Model extends BaseEntity {
     @Column(name = "name")
     private String name;
 
     @ManyToOne
     @JoinColumn(name = "brandId")
-//    @JsonBackReference
     private Brand brand;
 
     @ManyToOne
     @JoinColumn(name = "fuelId")
-//    @JsonBackReference
     private Fuel fuel;
 
     @ManyToOne
     @JoinColumn(name = "transmissionId")
-//    @JsonBackReference
     private Transmission transmission;
 
     @OneToMany(mappedBy = "model")

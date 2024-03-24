@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -16,9 +17,9 @@ public class CreatedRentalResponse {
 
     private LocalDateTime dateRented;
 
-    private LocalDateTime dateReturned;
+    private LocalDate dateReturned;
 
-    private Car car;
+    private GotCarResponse car;
 
     private Customer customer;
 

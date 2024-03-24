@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class CreatedCarResponse {
     private int id;
 
-    private Model model;
+    private GotModelResponseForCar model;
 
     private CarStatus status;
 

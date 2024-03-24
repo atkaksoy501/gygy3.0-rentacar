@@ -7,6 +7,7 @@ import com.turkcell.rentacar.business.dtos.responses.CreatedFuelResponse;
 import com.turkcell.rentacar.business.dtos.responses.GotFuelResponse;
 import com.turkcell.rentacar.business.dtos.responses.UpdatedFuelResponse;
 import com.turkcell.rentacar.entities.concretes.Fuel;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class FuelController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CreatedFuelResponse add(@RequestBody CreateFuelRequest fuel) {
+    public CreatedFuelResponse add(@Valid @RequestBody CreateFuelRequest fuel) {
         return fuelService.add(fuel);
     }
 
@@ -40,7 +41,7 @@ public class FuelController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public UpdatedFuelResponse update(@RequestBody UpdateFuelRequest updateFuelRequest) {
+    public UpdatedFuelResponse update(@Valid @RequestBody UpdateFuelRequest updateFuelRequest) {
         return fuelService.update(updateFuelRequest);
     }
 
