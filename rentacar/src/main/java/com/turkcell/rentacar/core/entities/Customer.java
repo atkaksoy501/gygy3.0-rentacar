@@ -40,4 +40,7 @@ public class Customer {
 
     @Column(name = "deleteDate")
     private LocalDateTime deleteDate;
+
+    @Column(name = "identityNo")
+    private String identityNo;
 }

@@ -18,8 +18,4 @@ public class BusinessCustomer extends Customer {
     @NotNull
     @Size(min = 2, max = 50)
     private String companyName;
-
-    @NotNull
-    @Size(min = 10, max = 10)
-    private String taxId;
 }

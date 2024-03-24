@@ -65,7 +65,7 @@ public class TransmissionManager implements TransmissionService {
         transmission.setUpdateDate(LocalDateTime.now());
         Transmission updatedTransmission = transmissionRepository.save(transmission);
         UpdatedTransmissionResponse updatedTransmissionResponse = this.modelMapperService.forResponse().map(updatedTransmission, UpdatedTransmissionResponse.class);
-        updatedTransmissionResponse.setUpdatedDate(updatedTransmission.getUpdateDate());
+        updatedTransmissionResponse.setUpdateDate(updatedTransmission.getUpdateDate());
         return updatedTransmissionResponse;
     }
 

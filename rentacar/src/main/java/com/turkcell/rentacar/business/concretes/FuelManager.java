@@ -60,7 +60,7 @@ public class FuelManager implements FuelService {
         fuel.setUpdateDate(LocalDateTime.now());
         Fuel updatedFuel = fuelRepository.save(fuel);
         UpdatedFuelResponse updatedFuelResponse = this.modelMapperService.forResponse().map(updatedFuel, UpdatedFuelResponse.class);
-        updatedFuelResponse.setUpdatedDate(updatedFuel.getUpdateDate());
+        updatedFuelResponse.setUpdateDate(updatedFuel.getUpdateDate());
         return updatedFuelResponse;
     }
 

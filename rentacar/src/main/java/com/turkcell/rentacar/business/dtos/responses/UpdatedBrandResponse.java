@@ -12,5 +12,5 @@ import java.time.LocalDateTime;
 public class UpdatedBrandResponse {
     private int id;
     private String name;
-    private LocalDateTime updatedDate;
+    private LocalDateTime updateDate;
 }

@@ -13,4 +13,17 @@ public class CreateModelRequest {
     @NotNull
     @Size(min = 2, max = 30)
     private String name;
+
+    @NotNull
+    private int brandId;
+
+    @NotNull
+    private int fuelId;
+
+    @NotNull
+    private int transmissionId;
+
+    @NotNull
+    @Size(min = 4, max = 4)
+    private int requiredFindexScore;
 }

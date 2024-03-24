@@ -64,7 +64,7 @@ public class BrandManager implements BrandService {
         brand.setUpdateDate(LocalDateTime.now());
         Brand updatedBrand = brandRepository.save(brand);
         UpdatedBrandResponse updatedBrandResponse = this.modelMapperService.forResponse().map(updatedBrand, UpdatedBrandResponse.class);
-        updatedBrandResponse.setUpdatedDate(updatedBrand.getUpdateDate());
+        updatedBrandResponse.setUpdateDate(updatedBrand.getUpdateDate());
         return updatedBrandResponse;
     }
 

@@ -1,5 +1,7 @@
 package com.turkcell.rentacar.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.turkcell.rentacar.core.entities.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -16,6 +18,10 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "maintenances")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id",
+        scope = Maintenance.class)
 public class Maintenance extends BaseEntity {
     private LocalDateTime dateSent;
 

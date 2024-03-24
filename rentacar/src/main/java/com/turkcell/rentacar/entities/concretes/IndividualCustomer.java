@@ -28,8 +28,4 @@ public class IndividualCustomer extends Customer {
     @NotNull
     private LocalDate birthDate;
 
-    @NotNull
-    @Size(min = 11, max = 11)
-    private String nationalId;
-
 }

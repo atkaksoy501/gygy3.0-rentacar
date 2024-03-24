@@ -1,16 +1,23 @@
 package com.turkcell.rentacar.business.concretes;
 
+import com.turkcell.rentacar.business.abstracts.BrandService;
+import com.turkcell.rentacar.business.abstracts.FuelService;
 import com.turkcell.rentacar.business.abstracts.ModelService;
+import com.turkcell.rentacar.business.abstracts.TransmissionService;
 import com.turkcell.rentacar.business.dtos.requests.CreateFuelRequest;
 import com.turkcell.rentacar.business.dtos.requests.CreateModelRequest;
 import com.turkcell.rentacar.business.dtos.requests.UpdateModelRequest;
 import com.turkcell.rentacar.business.dtos.responses.*;
 import com.turkcell.rentacar.business.rules.ModelBusinessRules;
 import com.turkcell.rentacar.core.utilities.mapping.ModelMapperService;
+import com.turkcell.rentacar.dataAccess.abstracts.BrandRepository;
+import com.turkcell.rentacar.dataAccess.abstracts.FuelRepository;
 import com.turkcell.rentacar.dataAccess.abstracts.ModelRepository;
+import com.turkcell.rentacar.dataAccess.abstracts.TransmissionRepository;
 import com.turkcell.rentacar.entities.concretes.Brand;
 import com.turkcell.rentacar.entities.concretes.Fuel;
 import com.turkcell.rentacar.entities.concretes.Model;
+import com.turkcell.rentacar.entities.concretes.Transmission;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,12 +32,22 @@ public class ModelManager implements ModelService {
     private ModelRepository modelRepository;
     private ModelMapperService modelMapperService;
     private ModelBusinessRules modelBusinessRules;
+    private FuelService fuelService;
+    private TransmissionService transmissionService;
+    private BrandService brandService;
 
     @Override
     public CreatedModelResponse add(CreateModelRequest createModelRequest) {
         modelBusinessRules.modelNameCannotBeDuplicated(createModelRequest.getName());
         Model model = this.modelMapperService.forRequest().map(createModelRequest, Model.class);
+        Fuel fuel = modelMapperService.forResponse().map(fuelService.getById(createModelRequest.getFuelId()), Fuel.class);
+        Transmission transmission = modelMapperService.forResponse()
+                .map(transmissionService.getById(createModelRequest.getTransmissionId()), Transmission.class);
+        Brand brand = modelMapperService.forResponse().map(brandService.getById(createModelRequest.getBrandId()), Brand.class);
         model.setCreateDate(LocalDateTime.now());
+        model.setBrand(brand);
+        model.setFuel(fuel);
+        model.setTransmission(transmission);
 
         Model savedModel = modelRepository.save(model);
 
@@ -65,7 +82,7 @@ public class ModelManager implements ModelService {
         model.setUpdateDate(LocalDateTime.now());
         Model updatedModel = modelRepository.save(model);
         UpdatedModelResponse updatedModelResponse = this.modelMapperService.forResponse().map(updatedModel, UpdatedModelResponse.class);
-        updatedModelResponse.setUpdatedDate(updatedModel.getUpdateDate());
+        updatedModelResponse.setUpdateDate(updatedModel.getUpdateDate());
         return updatedModelResponse;
     }
 
