@@ -17,7 +17,7 @@ public class MaintenanceBusinessRules {
     public void maintenanceMustExists(int maintenanceId) {
         Optional<Maintenance> maintenance = maintenanceRepository.findById(maintenanceId);
         if (maintenance.isEmpty()) {
-            throw new BusinessException("Maintenance not found. Maintenance must exist.");
+            throw new BusinessException("Maintenance not found. Maintenance must exist."); //todo: message constant olacak
         }
     }
 

@@ -19,4 +19,7 @@ public class CreateRentalRequest {
 
     @NotNull
     private LocalDate returnDate;
+
+    @NotNull
+    private CreditCardPaymentRequest creditCardPaymentRequest; //todo: type birden çok ödeme sistemine uygun hale getirilebilir
 }
