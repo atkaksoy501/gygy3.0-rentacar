@@ -49,4 +49,6 @@ public class MaintenanceManager implements MaintenanceService {
         Maintenance maintenance = maintenanceRepository.findById(id).orElse(null);
         return modelMapperService.forResponse().map(maintenance, GotMaintenanceResponse.class);
     }
+
+    //todo: returnCarFromMaintenance method oluşturulacak
 }

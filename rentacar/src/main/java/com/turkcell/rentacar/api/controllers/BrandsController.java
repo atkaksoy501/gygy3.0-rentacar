@@ -30,13 +30,13 @@ public class BrandsController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<GotBrandResponse> getAll() {
+    public List<GotBrandResponse> getAll() { //todo: GetAllBrandsResponse dto oluşturulacak
         return brandService.getAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public GotBrandResponse getById(@PathVariable int id) {
+    public GotBrandResponse getById(@PathVariable int id) { //todo: GetBrandResponseById dto olarak isimlendiirlecek
         return brandService.getById(id);
     }
 

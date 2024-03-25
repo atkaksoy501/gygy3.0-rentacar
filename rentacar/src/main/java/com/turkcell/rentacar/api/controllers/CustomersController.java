@@ -32,4 +32,6 @@ public class CustomersController {
     public CreatedIndividualCustomerResponse add(@Valid @RequestBody CreateIndividualCustomerRequest individualCustomer) {
         return individualCustomerService.add(individualCustomer);
     }
+
+    //todo: update, delete, getAll methods will be added
 }

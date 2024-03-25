@@ -25,7 +25,9 @@ public class CarsController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public GotCarResponse getById(@PathVariable int id) {
+    public GotCarResponse getById(@PathVariable int id) { //todo: GetCarResponseById dto olarak isimlendiirlecek
         return carService.getById(id);
     }
+
+    //todo: update, delete, getAll methods will be added
 }

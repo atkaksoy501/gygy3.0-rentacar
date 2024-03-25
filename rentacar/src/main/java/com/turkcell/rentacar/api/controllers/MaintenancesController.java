@@ -28,7 +28,9 @@ public class MaintenancesController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public GotMaintenanceResponse getById(@PathVariable int id) {
+    public GotMaintenanceResponse getById(@PathVariable int id) { //todo: GetMaintenanceResponseById dto olarak isimlendiirlecek
         return maintenanceService.getById(id);
     }
+
+    //todo: update, delete, getAll methods will be added
 }

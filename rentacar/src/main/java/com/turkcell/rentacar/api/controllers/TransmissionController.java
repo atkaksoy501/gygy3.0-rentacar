@@ -29,13 +29,13 @@ public class TransmissionController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<GotTransmissionResponse> getAll() {
+    public List<GotTransmissionResponse> getAll() { //todo: GetAllTransmissionsResponse dto oluşturulacak
         return transmissionService.getAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public GotTransmissionResponse getById(@PathVariable int id) {
+    public GotTransmissionResponse getById(@PathVariable int id) { //todo: GetTransmissionResponseById dto olarak isimlendirilecek
         return transmissionService.getById(id);
     }
 

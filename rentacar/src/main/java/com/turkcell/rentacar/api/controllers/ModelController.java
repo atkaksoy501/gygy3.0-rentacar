@@ -29,13 +29,13 @@ public class ModelController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<GotModelResponse> getAll() {
+    public List<GotModelResponse> getAll() { //todo: GetAllModelsResponse dto oluşturulacak
         return modelService.getAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public GotModelResponse getById(@PathVariable int id) {
+    public GotModelResponse getById(@PathVariable int id) { //todo: GetModelResponseById dto olarak isimlendirilecek
         return modelService.getById(id);
     }
 

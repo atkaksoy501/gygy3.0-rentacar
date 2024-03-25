@@ -31,7 +31,9 @@ public class RentalsController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public GotRentalResponse getById(@PathVariable int id) {
+    public GotRentalResponse getById(@PathVariable int id) { //todo: GetRentalResponseById dto olarak isimlendiirlecek
         return rentalService.getById(id);
     }
+
+    //todo: update, delete, getAll methods will be added
 }

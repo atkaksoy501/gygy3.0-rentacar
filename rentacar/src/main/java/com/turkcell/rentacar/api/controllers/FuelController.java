@@ -29,13 +29,13 @@ public class FuelController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<GotFuelResponse> getAll() {
+    public List<GotFuelResponse> getAll() { //todo: GetAllFuelsResponse dto oluşturulacak
         return fuelService.getAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public GotFuelResponse getById(@PathVariable int id) {
+    public GotFuelResponse getById(@PathVariable int id) { //todo: GetFuelResponseById dto olarak isimlendirilecek
         return fuelService.getById(id);
     }
 
