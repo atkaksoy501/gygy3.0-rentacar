@@ -1,7 +1,11 @@
 package com.turkcell.rentacar.api.controllers;
 
+import com.turkcell.rentacar.business.abstracts.RentalExtraService;
 import com.turkcell.rentacar.business.abstracts.RentalService;
+import com.turkcell.rentacar.business.dtos.requests.CreateRentalExtrasRequest;
 import com.turkcell.rentacar.business.dtos.requests.CreateRentalRequest;
+import com.turkcell.rentacar.business.dtos.requests.UpdateRentalWithExtraRequest;
+import com.turkcell.rentacar.business.dtos.responses.CreatedRentalExtraResponse;
 import com.turkcell.rentacar.business.dtos.responses.CreatedRentalResponse;
 import com.turkcell.rentacar.business.dtos.responses.GotRentalResponse;
 import com.turkcell.rentacar.entities.concretes.Rental;
@@ -21,6 +25,12 @@ public class RentalsController {
     @ResponseStatus(HttpStatus.CREATED)
     public CreatedRentalResponse addBusiness(@Valid @RequestBody CreateRentalRequest rental) {
         return rentalService.addRentalForBusiness(rental);
+    }
+
+    @PostMapping("/add/extra")
+    @ResponseStatus(HttpStatus.OK)
+    public Rental updateRentalWithExtra(@Valid @RequestBody UpdateRentalWithExtraRequest extrasRequest) {
+        return rentalService.updateRentalWithExtras(extrasRequest);
     }
 
     @PostMapping("/individual")

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,4 +30,8 @@ public class Rental extends BaseEntity {
     @ManyToOne
     @JoinColumn(name="customerId")
     private Customer customer;
+
+    @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
+    private List<RentalExtras> extras;
+
 }

@@ -5,24 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CreateRentalRequest {
+public class UpdateRentalWithExtraRequest {
     @NotNull
-    private int carId;
-
+    private int rentalId;
     @NotNull
-    private int customerId;
-
-    @NotNull
-    private LocalDate returnDate;
-
     private List<CreateRentalExtraWithRentalRequest> extras;
-
-    @NotNull
-    private CreditCardPaymentRequest creditCardPaymentRequest; //todo: type birden çok ödeme sistemine uygun hale getirilebilir
 }
