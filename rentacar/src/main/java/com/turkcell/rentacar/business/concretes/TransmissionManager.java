@@ -1,15 +1,12 @@
 package com.turkcell.rentacar.business.concretes;
 
 import com.turkcell.rentacar.business.abstracts.TransmissionService;
-import com.turkcell.rentacar.business.dtos.requests.CreateFuelRequest;
-import com.turkcell.rentacar.business.dtos.requests.CreateTransmissionRequest;
-import com.turkcell.rentacar.business.dtos.requests.UpdateTransmissionRequest;
-import com.turkcell.rentacar.business.dtos.responses.*;
+import com.turkcell.rentacar.business.dtos.requests.Transmission.CreateTransmissionRequest;
+import com.turkcell.rentacar.business.dtos.requests.Transmission.UpdateTransmissionRequest;
+import com.turkcell.rentacar.business.dtos.responses.Transmission.*;
 import com.turkcell.rentacar.business.rules.TransmissionBusinessRules;
 import com.turkcell.rentacar.core.utilities.mapping.ModelMapperService;
 import com.turkcell.rentacar.dataAccess.abstracts.TransmissionRepository;
-import com.turkcell.rentacar.entities.concretes.Brand;
-import com.turkcell.rentacar.entities.concretes.Fuel;
 import com.turkcell.rentacar.entities.concretes.Transmission;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,21 +38,21 @@ public class TransmissionManager implements TransmissionService {
     }
 
     @Override
-    public List<GotTransmissionResponse> getAll() {
+    public List<GetAllTransmissionResponse> getAll() {
         List<Transmission> transmissions = transmissionRepository.findAll();
-        List<GotTransmissionResponse> gotTransmissionResponseList = new ArrayList<>();
+        List<GetAllTransmissionResponse> getTransmissionResponseList = new ArrayList<>();
         for (Transmission transmission : transmissions) {
-            GotTransmissionResponse gotTransmissionResponse = this.modelMapperService.forResponse().map(transmission, GotTransmissionResponse.class);
-            gotTransmissionResponseList.add(gotTransmissionResponse);
+            GetAllTransmissionResponse getTransmissionResponse = this.modelMapperService.forResponse().map(transmission, GetAllTransmissionResponse.class);
+            getTransmissionResponseList.add(getTransmissionResponse);
         }
-        return gotTransmissionResponseList;
+        return getTransmissionResponseList;
     }
 
     @Override
-    public GotTransmissionResponse getById(int id) {
+    public GetTransmissionResponseById getById(int id) {
         transmissionBusinessRules.transmissionMustExists(id);
         Transmission transmission = transmissionRepository.findById(id).orElse(null);
-        return this.modelMapperService.forResponse().map(transmission, GotTransmissionResponse.class);
+        return this.modelMapperService.forResponse().map(transmission, GetTransmissionResponseById.class);
     }
 
     @Override

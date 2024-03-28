@@ -1,12 +1,9 @@
 package com.turkcell.rentacar.api.controllers;
 
 import com.turkcell.rentacar.business.abstracts.FuelService;
-import com.turkcell.rentacar.business.dtos.requests.CreateFuelRequest;
-import com.turkcell.rentacar.business.dtos.requests.UpdateFuelRequest;
-import com.turkcell.rentacar.business.dtos.responses.CreatedFuelResponse;
-import com.turkcell.rentacar.business.dtos.responses.GotFuelResponse;
-import com.turkcell.rentacar.business.dtos.responses.UpdatedFuelResponse;
-import com.turkcell.rentacar.entities.concretes.Fuel;
+import com.turkcell.rentacar.business.dtos.requests.Fuel.CreateFuelRequest;
+import com.turkcell.rentacar.business.dtos.requests.Fuel.UpdateFuelRequest;
+import com.turkcell.rentacar.business.dtos.responses.Fuel.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,13 +26,13 @@ public class FuelController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<GotFuelResponse> getAll() { //todo: GetAllFuelsResponse dto oluşturulacak
+    public List<GetAllFuelResponse> getAll() {
         return fuelService.getAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public GotFuelResponse getById(@PathVariable int id) { //todo: GetFuelResponseById dto olarak isimlendirilecek
+    public GetFuelResponseById getById(@PathVariable int id) {
         return fuelService.getById(id);
     }
 

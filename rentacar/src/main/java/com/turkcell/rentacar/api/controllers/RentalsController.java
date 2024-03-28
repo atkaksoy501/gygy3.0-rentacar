@@ -1,19 +1,14 @@
 package com.turkcell.rentacar.api.controllers;
 
-import com.turkcell.rentacar.business.abstracts.RentalExtraService;
 import com.turkcell.rentacar.business.abstracts.RentalService;
-import com.turkcell.rentacar.business.dtos.requests.CreateRentalExtrasRequest;
-import com.turkcell.rentacar.business.dtos.requests.CreateRentalRequest;
-import com.turkcell.rentacar.business.dtos.requests.UpdateRentalWithExtraRequest;
-import com.turkcell.rentacar.business.dtos.responses.CreatedRentalExtraResponse;
-import com.turkcell.rentacar.business.dtos.responses.CreatedRentalResponse;
-import com.turkcell.rentacar.business.dtos.responses.GotRentalResponse;
-import com.turkcell.rentacar.business.dtos.responses.UpdatedRentalResponse;
-import com.turkcell.rentacar.entities.concretes.Rental;
+import com.turkcell.rentacar.business.dtos.requests.Rental.CreateRentalRequest;
+import com.turkcell.rentacar.business.dtos.requests.Rental.UpdateRentalWithExtraRequest;
+import com.turkcell.rentacar.business.dtos.responses.Rental.CreatedRentalResponse;
+import com.turkcell.rentacar.business.dtos.responses.Rental.GetRentalResponseById;
+import com.turkcell.rentacar.business.dtos.responses.Rental.UpdatedRentalResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -42,7 +37,7 @@ public class RentalsController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public GotRentalResponse getById(@PathVariable int id) { //todo: GetRentalResponseById dto olarak isimlendiirlecek
+    public GetRentalResponseById getById(@PathVariable int id) {
         return rentalService.getById(id);
     }
 

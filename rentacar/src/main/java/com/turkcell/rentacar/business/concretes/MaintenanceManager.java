@@ -2,12 +2,11 @@ package com.turkcell.rentacar.business.concretes;
 
 import com.turkcell.rentacar.business.abstracts.CarService;
 import com.turkcell.rentacar.business.abstracts.MaintenanceService;
-import com.turkcell.rentacar.business.dtos.requests.CreateMaintenanceRequest;
-import com.turkcell.rentacar.business.dtos.responses.CreatedMaintenanceResponse;
-import com.turkcell.rentacar.business.dtos.responses.GotMaintenanceResponse;
+import com.turkcell.rentacar.business.dtos.requests.Maintenance.CreateMaintenanceRequest;
+import com.turkcell.rentacar.business.dtos.responses.Maintenance.CreatedMaintenanceResponse;
+import com.turkcell.rentacar.business.dtos.responses.Maintenance.GetMaintenanceResponseById;
 import com.turkcell.rentacar.business.rules.CarBusinessRules;
 import com.turkcell.rentacar.business.rules.MaintenanceBusinessRules;
-import com.turkcell.rentacar.business.rules.RentalBusinessRules;
 import com.turkcell.rentacar.core.utilities.mapping.ModelMapperService;
 import com.turkcell.rentacar.dataAccess.abstracts.MaintenanceRepository;
 import com.turkcell.rentacar.entities.concretes.Car;
@@ -16,7 +15,6 @@ import com.turkcell.rentacar.entities.concretes.enums.CarStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -44,10 +42,10 @@ public class MaintenanceManager implements MaintenanceService {
     }
 
     @Override
-    public GotMaintenanceResponse getById(int id) {
+    public GetMaintenanceResponseById getById(int id) {
         maintenanceBusinessRules.maintenanceMustExists(id);
         Maintenance maintenance = maintenanceRepository.findById(id).orElse(null);
-        return modelMapperService.forResponse().map(maintenance, GotMaintenanceResponse.class);
+        return modelMapperService.forResponse().map(maintenance, GetMaintenanceResponseById.class);
     }
 
     //todo: returnCarFromMaintenance method oluşturulacak

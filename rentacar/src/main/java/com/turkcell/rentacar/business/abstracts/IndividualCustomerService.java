@@ -1,11 +1,10 @@
 package com.turkcell.rentacar.business.abstracts;
 
-import com.turkcell.rentacar.business.dtos.requests.CreateIndividualCustomerRequest;
-import com.turkcell.rentacar.business.dtos.responses.CreatedIndividualCustomerResponse;
-import com.turkcell.rentacar.business.dtos.responses.GotIndividualCustomerResponse;
-import com.turkcell.rentacar.entities.concretes.IndividualCustomer;
+import com.turkcell.rentacar.business.dtos.requests.Customer.IndividualCustomer.CreateIndividualCustomerRequest;
+import com.turkcell.rentacar.business.dtos.responses.Customer.IndividualCustomer.CreatedIndividualCustomerResponse;
+import com.turkcell.rentacar.business.dtos.responses.Customer.IndividualCustomer.GetIndividualCustomerResponse;
 
 public interface IndividualCustomerService {
     CreatedIndividualCustomerResponse add(CreateIndividualCustomerRequest customer);
-    GotIndividualCustomerResponse getById(int id);
+    GetIndividualCustomerResponse getById(int id);
 }

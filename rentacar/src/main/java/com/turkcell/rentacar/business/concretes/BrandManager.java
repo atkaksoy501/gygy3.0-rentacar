@@ -1,11 +1,10 @@
 package com.turkcell.rentacar.business.concretes;
 
 import com.turkcell.rentacar.business.abstracts.BrandService;
-import com.turkcell.rentacar.business.dtos.requests.CreateBrandRequest;
-import com.turkcell.rentacar.business.dtos.requests.UpdateBrandRequest;
-import com.turkcell.rentacar.business.dtos.responses.CreatedBrandResponse;
-import com.turkcell.rentacar.business.dtos.responses.GotBrandResponse;
-import com.turkcell.rentacar.business.dtos.responses.UpdatedBrandResponse;
+import com.turkcell.rentacar.business.dtos.requests.Brand.CreateBrandRequest;
+import com.turkcell.rentacar.business.dtos.requests.Brand.UpdateBrandRequest;
+import com.turkcell.rentacar.business.dtos.responses.Brand.*;
+import com.turkcell.rentacar.business.dtos.responses.Fuel.GetAllFuelResponse;
 import com.turkcell.rentacar.business.rules.BrandBusinessRules;
 import com.turkcell.rentacar.core.utilities.mapping.ModelMapperService;
 import com.turkcell.rentacar.dataAccess.abstracts.BrandRepository;
@@ -40,21 +39,21 @@ public class BrandManager implements BrandService {
     }
 
     @Override
-    public List<GotBrandResponse> getAll() {
+    public List<GetAllBrandResponse> getAll() {
         List<Brand> brands = brandRepository.findAll();
-        List<GotBrandResponse> gotBrandResponseList = new ArrayList<>();
+        List<GetAllBrandResponse> getBrandResponseList = new ArrayList<>();
         for (Brand brand : brands) {
-            GotBrandResponse gotBrandResponse = this.modelMapperService.forResponse().map(brand, GotBrandResponse.class);
-            gotBrandResponseList.add(gotBrandResponse);
+            GetAllBrandResponse getBrandResponse = this.modelMapperService.forResponse().map(brand, GetAllBrandResponse.class);
+            getBrandResponseList.add(getBrandResponse);
         }
-        return gotBrandResponseList;
+        return getBrandResponseList;
     }
 
     @Override
-    public GotBrandResponse getById(int id) {
+    public GetBrandResponseById getById(int id) {
         brandBusinessRules.brandMustExists(id);
         Brand brand = brandRepository.findById(id).orElse(null);
-        return this.modelMapperService.forResponse().map(brand, GotBrandResponse.class);
+        return this.modelMapperService.forResponse().map(brand, GetBrandResponseById.class);
     }
 
     @Override

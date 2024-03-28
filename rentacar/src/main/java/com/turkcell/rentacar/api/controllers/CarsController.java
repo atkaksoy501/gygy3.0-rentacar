@@ -1,10 +1,10 @@
 package com.turkcell.rentacar.api.controllers;
 
 import com.turkcell.rentacar.business.abstracts.CarService;
-import com.turkcell.rentacar.business.dtos.requests.CreateCarRequest;
-import com.turkcell.rentacar.business.dtos.responses.CreatedCarResponse;
-import com.turkcell.rentacar.business.dtos.responses.GotCarResponse;
-import com.turkcell.rentacar.entities.concretes.Car;
+import com.turkcell.rentacar.business.dtos.requests.Car.CreateCarRequest;
+import com.turkcell.rentacar.business.dtos.responses.Car.CreatedCarResponse;
+import com.turkcell.rentacar.business.dtos.responses.Car.GetCarResponse;
+import com.turkcell.rentacar.business.dtos.responses.Car.GetCarResponseById;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class CarsController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public GotCarResponse getById(@PathVariable int id) { //todo: GetCarResponseById dto olarak isimlendiirlecek
+    public GetCarResponseById getById(@PathVariable int id) {
         return carService.getById(id);
     }
 

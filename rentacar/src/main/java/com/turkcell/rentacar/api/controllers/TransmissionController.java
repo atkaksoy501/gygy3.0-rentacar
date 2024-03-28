@@ -1,12 +1,9 @@
 package com.turkcell.rentacar.api.controllers;
 
 import com.turkcell.rentacar.business.abstracts.TransmissionService;
-import com.turkcell.rentacar.business.dtos.requests.CreateTransmissionRequest;
-import com.turkcell.rentacar.business.dtos.requests.UpdateTransmissionRequest;
-import com.turkcell.rentacar.business.dtos.responses.CreatedTransmissionResponse;
-import com.turkcell.rentacar.business.dtos.responses.GotTransmissionResponse;
-import com.turkcell.rentacar.business.dtos.responses.UpdatedTransmissionResponse;
-import com.turkcell.rentacar.entities.concretes.Transmission;
+import com.turkcell.rentacar.business.dtos.requests.Transmission.CreateTransmissionRequest;
+import com.turkcell.rentacar.business.dtos.requests.Transmission.UpdateTransmissionRequest;
+import com.turkcell.rentacar.business.dtos.responses.Transmission.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,13 +26,13 @@ public class TransmissionController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<GotTransmissionResponse> getAll() { //todo: GetAllTransmissionsResponse dto oluşturulacak
+    public List<GetAllTransmissionResponse> getAll() {
         return transmissionService.getAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public GotTransmissionResponse getById(@PathVariable int id) { //todo: GetTransmissionResponseById dto olarak isimlendirilecek
+    public GetTransmissionResponseById getById(@PathVariable int id) {
         return transmissionService.getById(id);
     }
 

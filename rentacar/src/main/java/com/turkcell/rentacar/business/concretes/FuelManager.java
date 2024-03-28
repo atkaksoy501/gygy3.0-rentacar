@@ -1,13 +1,12 @@
 package com.turkcell.rentacar.business.concretes;
 
 import com.turkcell.rentacar.business.abstracts.FuelService;
-import com.turkcell.rentacar.business.dtos.requests.CreateFuelRequest;
-import com.turkcell.rentacar.business.dtos.requests.UpdateFuelRequest;
-import com.turkcell.rentacar.business.dtos.responses.*;
+import com.turkcell.rentacar.business.dtos.requests.Fuel.CreateFuelRequest;
+import com.turkcell.rentacar.business.dtos.requests.Fuel.UpdateFuelRequest;
+import com.turkcell.rentacar.business.dtos.responses.Fuel.*;
 import com.turkcell.rentacar.business.rules.FuelBusinessRules;
 import com.turkcell.rentacar.core.utilities.mapping.ModelMapperService;
 import com.turkcell.rentacar.dataAccess.abstracts.FuelRepository;
-import com.turkcell.rentacar.entities.concretes.Brand;
 import com.turkcell.rentacar.entities.concretes.Fuel;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,21 +35,21 @@ public class FuelManager implements FuelService {
     }
 
     @Override
-    public List<GotFuelResponse> getAll() {
+    public List<GetAllFuelResponse> getAll() {
         List<Fuel> fuels = fuelRepository.findAll();
-        List<GotFuelResponse> gotFuelResponseList = new ArrayList<>();
+        List<GetAllFuelResponse> getFuelResponseList = new ArrayList<>();
         for (Fuel fuel : fuels) {
-            GotFuelResponse gotFuelResponse = this.modelMapperService.forResponse().map(fuel, GotFuelResponse.class);
-            gotFuelResponseList.add(gotFuelResponse);
+            GetAllFuelResponse getFuelResponse = this.modelMapperService.forResponse().map(fuel, GetAllFuelResponse.class);
+            getFuelResponseList.add(getFuelResponse);
         }
-        return gotFuelResponseList;
+        return getFuelResponseList;
     }
 
     @Override
-    public GotFuelResponse getById(int id) {
+    public GetFuelResponseById getById(int id) {
         fuelBusinessRules.fuelMustExists(id);
         Fuel fuel = fuelRepository.findById(id).orElse(null);
-        return this.modelMapperService.forResponse().map(fuel, GotFuelResponse.class);
+        return this.modelMapperService.forResponse().map(fuel, GetFuelResponseById.class);
     }
 
     @Override

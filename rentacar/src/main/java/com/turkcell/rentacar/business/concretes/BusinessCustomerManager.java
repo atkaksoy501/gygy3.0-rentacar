@@ -1,9 +1,9 @@
 package com.turkcell.rentacar.business.concretes;
 
 import com.turkcell.rentacar.business.abstracts.BusinessCustomerService;
-import com.turkcell.rentacar.business.dtos.requests.CreateBusinessCustomerRequest;
-import com.turkcell.rentacar.business.dtos.responses.CreatedBusinessCustomerResponse;
-import com.turkcell.rentacar.business.dtos.responses.GotBusinessCustomerReponse;
+import com.turkcell.rentacar.business.dtos.requests.Customer.BusinessCustomer.CreateBusinessCustomerRequest;
+import com.turkcell.rentacar.business.dtos.responses.Customer.BusinessCustomer.CreatedBusinessCustomerResponse;
+import com.turkcell.rentacar.business.dtos.responses.Customer.BusinessCustomer.GetBusinessCustomerReponse;
 import com.turkcell.rentacar.business.rules.BusinessCustomerBusinessRules;
 import com.turkcell.rentacar.core.utilities.mapping.ModelMapperService;
 import com.turkcell.rentacar.dataAccess.abstracts.BusinessCustomerRepository;
@@ -22,10 +22,10 @@ public class BusinessCustomerManager implements BusinessCustomerService {
     private BusinessCustomerBusinessRules businessCustomerBusinessRules;
 
     @Override
-    public GotBusinessCustomerReponse getById(int id) {
+    public GetBusinessCustomerReponse getById(int id) {
         businessCustomerBusinessRules.businessCustomerMustExists(id);
         BusinessCustomer businessCustomer = businessCustomerRepository.findById(id).orElse(null);
-        return modelMapperService.forResponse().map(businessCustomer, GotBusinessCustomerReponse.class);
+        return modelMapperService.forResponse().map(businessCustomer, GetBusinessCustomerReponse.class);
     }
 
     @Override

@@ -4,16 +4,15 @@ import com.turkcell.rentacar.business.abstracts.BrandService;
 import com.turkcell.rentacar.business.abstracts.FuelService;
 import com.turkcell.rentacar.business.abstracts.ModelService;
 import com.turkcell.rentacar.business.abstracts.TransmissionService;
-import com.turkcell.rentacar.business.dtos.requests.CreateFuelRequest;
-import com.turkcell.rentacar.business.dtos.requests.CreateModelRequest;
-import com.turkcell.rentacar.business.dtos.requests.UpdateModelRequest;
-import com.turkcell.rentacar.business.dtos.responses.*;
+import com.turkcell.rentacar.business.dtos.requests.Model.CreateModelRequest;
+import com.turkcell.rentacar.business.dtos.requests.Model.UpdateModelRequest;
+import com.turkcell.rentacar.business.dtos.responses.Model.CreatedModelResponse;
+import com.turkcell.rentacar.business.dtos.responses.Model.GetAllModelResponse;
+import com.turkcell.rentacar.business.dtos.responses.Model.GetModelResponseById;
+import com.turkcell.rentacar.business.dtos.responses.Model.UpdatedModelResponse;
 import com.turkcell.rentacar.business.rules.ModelBusinessRules;
 import com.turkcell.rentacar.core.utilities.mapping.ModelMapperService;
-import com.turkcell.rentacar.dataAccess.abstracts.BrandRepository;
-import com.turkcell.rentacar.dataAccess.abstracts.FuelRepository;
 import com.turkcell.rentacar.dataAccess.abstracts.ModelRepository;
-import com.turkcell.rentacar.dataAccess.abstracts.TransmissionRepository;
 import com.turkcell.rentacar.entities.concretes.Brand;
 import com.turkcell.rentacar.entities.concretes.Fuel;
 import com.turkcell.rentacar.entities.concretes.Model;
@@ -58,21 +57,21 @@ public class ModelManager implements ModelService {
     }
 
     @Override
-    public List<GotModelResponse> getAll() {
+    public List<GetAllModelResponse> getAll() {
         List<Model> models = modelRepository.findAll();
-        List<GotModelResponse> gotModelResponseList = new ArrayList<>();
+        List<GetAllModelResponse> getModelResponseByIdList = new ArrayList<>();
         for (Model model : models) {
-            GotModelResponse gotModelResponse = this.modelMapperService.forResponse().map(model, GotModelResponse.class);
-            gotModelResponseList.add(gotModelResponse);
+            GetAllModelResponse getModelResponseById = this.modelMapperService.forResponse().map(model, GetAllModelResponse.class);
+            getModelResponseByIdList.add(getModelResponseById);
         }
-        return gotModelResponseList;
+        return getModelResponseByIdList;
     }
 
     @Override
-    public GotModelResponse getById(int id) {
+    public GetModelResponseById getById(int id) {
         modelBusinessRules.modelMustExists(id);
         Model model = modelRepository.findById(id).orElse(null);
-        return this.modelMapperService.forResponse().map(model, GotModelResponse.class);
+        return this.modelMapperService.forResponse().map(model, GetModelResponseById.class);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.turkcell.rentacar.business.concretes;
 
 import com.turkcell.rentacar.business.abstracts.IndividualCustomerService;
-import com.turkcell.rentacar.business.dtos.requests.CreateIndividualCustomerRequest;
-import com.turkcell.rentacar.business.dtos.responses.CreatedIndividualCustomerResponse;
-import com.turkcell.rentacar.business.dtos.responses.GotIndividualCustomerResponse;
+import com.turkcell.rentacar.business.dtos.requests.Customer.IndividualCustomer.CreateIndividualCustomerRequest;
+import com.turkcell.rentacar.business.dtos.responses.Customer.IndividualCustomer.CreatedIndividualCustomerResponse;
+import com.turkcell.rentacar.business.dtos.responses.Customer.IndividualCustomer.GetIndividualCustomerResponse;
 import com.turkcell.rentacar.business.rules.IndividualCustomerBusinessRules;
 import com.turkcell.rentacar.core.utilities.mapping.ModelMapperService;
 import com.turkcell.rentacar.dataAccess.abstracts.IndividualCustomerRepository;
@@ -28,9 +28,9 @@ public class IndividualCustomerManager implements IndividualCustomerService {
     }
 
     @Override
-    public GotIndividualCustomerResponse getById(int id) {
+    public GetIndividualCustomerResponse getById(int id) {
         individualCustomerBusinessRules.individualCustomerMustExists(id);
         IndividualCustomer individualCustomer = individualCustomerRepository.findById(id).orElse(null);
-        return modelMapperService.forResponse().map(individualCustomer, GotIndividualCustomerResponse.class);
+        return modelMapperService.forResponse().map(individualCustomer, GetIndividualCustomerResponse.class);
     }
 }

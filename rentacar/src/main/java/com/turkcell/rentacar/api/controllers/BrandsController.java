@@ -2,12 +2,9 @@ package com.turkcell.rentacar.api.controllers;
 
 
 import com.turkcell.rentacar.business.abstracts.BrandService;
-import com.turkcell.rentacar.business.dtos.requests.CreateBrandRequest;
-import com.turkcell.rentacar.business.dtos.requests.UpdateBrandRequest;
-import com.turkcell.rentacar.business.dtos.responses.CreatedBrandResponse;
-import com.turkcell.rentacar.business.dtos.responses.GotBrandResponse;
-import com.turkcell.rentacar.business.dtos.responses.UpdatedBrandResponse;
-import com.turkcell.rentacar.entities.concretes.Brand;
+import com.turkcell.rentacar.business.dtos.requests.Brand.CreateBrandRequest;
+import com.turkcell.rentacar.business.dtos.requests.Brand.UpdateBrandRequest;
+import com.turkcell.rentacar.business.dtos.responses.Brand.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,13 +27,13 @@ public class BrandsController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<GotBrandResponse> getAll() { //todo: GetAllBrandsResponse dto oluşturulacak
+    public List<GetAllBrandResponse> getAll() {
         return brandService.getAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public GotBrandResponse getById(@PathVariable int id) { //todo: GetBrandResponseById dto olarak isimlendiirlecek
+    public GetBrandResponseById getById(@PathVariable int id) {
         return brandService.getById(id);
     }
 

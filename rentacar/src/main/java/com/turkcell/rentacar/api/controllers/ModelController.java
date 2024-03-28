@@ -1,12 +1,12 @@
 package com.turkcell.rentacar.api.controllers;
 
 import com.turkcell.rentacar.business.abstracts.ModelService;
-import com.turkcell.rentacar.business.dtos.requests.CreateModelRequest;
-import com.turkcell.rentacar.business.dtos.requests.UpdateModelRequest;
-import com.turkcell.rentacar.business.dtos.responses.CreatedModelResponse;
-import com.turkcell.rentacar.business.dtos.responses.GotModelResponse;
-import com.turkcell.rentacar.business.dtos.responses.UpdatedModelResponse;
-import com.turkcell.rentacar.entities.concretes.Model;
+import com.turkcell.rentacar.business.dtos.requests.Model.CreateModelRequest;
+import com.turkcell.rentacar.business.dtos.requests.Model.UpdateModelRequest;
+import com.turkcell.rentacar.business.dtos.responses.Model.CreatedModelResponse;
+import com.turkcell.rentacar.business.dtos.responses.Model.GetAllModelResponse;
+import com.turkcell.rentacar.business.dtos.responses.Model.GetModelResponseById;
+import com.turkcell.rentacar.business.dtos.responses.Model.UpdatedModelResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,13 +29,13 @@ public class ModelController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<GotModelResponse> getAll() { //todo: GetAllModelsResponse dto oluşturulacak
+    public List<GetAllModelResponse> getAll() {
         return modelService.getAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public GotModelResponse getById(@PathVariable int id) { //todo: GetModelResponseById dto olarak isimlendirilecek
+    public GetModelResponseById getById(@PathVariable int id) {
         return modelService.getById(id);
     }
 

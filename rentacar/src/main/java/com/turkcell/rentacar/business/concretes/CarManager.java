@@ -2,9 +2,10 @@ package com.turkcell.rentacar.business.concretes;
 
 import com.turkcell.rentacar.business.abstracts.CarService;
 import com.turkcell.rentacar.business.abstracts.ModelService;
-import com.turkcell.rentacar.business.dtos.requests.CreateCarRequest;
-import com.turkcell.rentacar.business.dtos.responses.CreatedCarResponse;
-import com.turkcell.rentacar.business.dtos.responses.GotCarResponse;
+import com.turkcell.rentacar.business.dtos.requests.Car.CreateCarRequest;
+import com.turkcell.rentacar.business.dtos.responses.Car.CreatedCarResponse;
+import com.turkcell.rentacar.business.dtos.responses.Car.GetCarResponse;
+import com.turkcell.rentacar.business.dtos.responses.Car.GetCarResponseById;
 import com.turkcell.rentacar.business.rules.CarBusinessRules;
 import com.turkcell.rentacar.core.utilities.mapping.ModelMapperService;
 import com.turkcell.rentacar.dataAccess.abstracts.CarRepository;
@@ -39,10 +40,10 @@ public class CarManager implements CarService{
     }
 
     @Override
-    public GotCarResponse getById(int id) {
+    public GetCarResponseById getById(int id) {
         carBusinessRules.carMustExists(id);
         Car dbCar = carRepository.findById(id).orElse(null);
-        return modelMapperService.forResponse().map(dbCar, GotCarResponse.class);
+        return modelMapperService.forResponse().map(dbCar, GetCarResponseById.class);
     }
 
     @Override

@@ -1,13 +1,10 @@
 package com.turkcell.rentacar.business.abstracts;
 
-import com.turkcell.rentacar.business.dtos.requests.CreateBusinessCustomerRequest;
-import com.turkcell.rentacar.business.dtos.responses.CreatedBusinessCustomerResponse;
-import com.turkcell.rentacar.business.dtos.responses.GotBusinessCustomerReponse;
-import com.turkcell.rentacar.entities.concretes.BusinessCustomer;
-
-import java.util.List;
+import com.turkcell.rentacar.business.dtos.requests.Customer.BusinessCustomer.CreateBusinessCustomerRequest;
+import com.turkcell.rentacar.business.dtos.responses.Customer.BusinessCustomer.CreatedBusinessCustomerResponse;
+import com.turkcell.rentacar.business.dtos.responses.Customer.BusinessCustomer.GetBusinessCustomerReponse;
 
 public interface BusinessCustomerService {
-    GotBusinessCustomerReponse getById(int id);
+    GetBusinessCustomerReponse getById(int id);
     CreatedBusinessCustomerResponse add(CreateBusinessCustomerRequest customer);
 }
