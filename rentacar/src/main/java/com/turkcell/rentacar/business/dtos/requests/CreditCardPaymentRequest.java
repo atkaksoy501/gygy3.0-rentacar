@@ -22,6 +22,6 @@ public class CreditCardPaymentRequest {
     @NotNull
     @Size(min = 5, max = 5)
     private String expirationDate;
-    @NotNull
+
     private double amount;
 }

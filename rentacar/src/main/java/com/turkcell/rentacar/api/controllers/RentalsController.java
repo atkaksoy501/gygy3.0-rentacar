@@ -8,6 +8,7 @@ import com.turkcell.rentacar.business.dtos.requests.UpdateRentalWithExtraRequest
 import com.turkcell.rentacar.business.dtos.responses.CreatedRentalExtraResponse;
 import com.turkcell.rentacar.business.dtos.responses.CreatedRentalResponse;
 import com.turkcell.rentacar.business.dtos.responses.GotRentalResponse;
+import com.turkcell.rentacar.business.dtos.responses.UpdatedRentalResponse;
 import com.turkcell.rentacar.entities.concretes.Rental;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class RentalsController {
 
     @PostMapping("/add/extra")
     @ResponseStatus(HttpStatus.OK)
-    public Rental updateRentalWithExtra(@Valid @RequestBody UpdateRentalWithExtraRequest extrasRequest) {
+    public UpdatedRentalResponse updateRentalWithExtra(@Valid @RequestBody UpdateRentalWithExtraRequest extrasRequest) {
         return rentalService.updateRentalWithExtras(extrasRequest);
     }
 

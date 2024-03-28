@@ -1,5 +1,6 @@
 package com.turkcell.rentacar.business.dtos.requests;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class CreateRentalExtraWithRentalRequest {
+    @NotNull
     private String name;
+    @NotNull
     private double price;
 }

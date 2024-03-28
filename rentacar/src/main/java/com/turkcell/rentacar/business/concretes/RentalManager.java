@@ -1,11 +1,13 @@
 package com.turkcell.rentacar.business.concretes;
 
 import com.turkcell.rentacar.business.abstracts.*;
+import com.turkcell.rentacar.business.dtos.requests.CreateRentalExtraWithRentalRequest;
 import com.turkcell.rentacar.business.dtos.requests.CreateRentalRequest;
 import com.turkcell.rentacar.business.dtos.requests.CreditCardPaymentRequest;
 import com.turkcell.rentacar.business.dtos.requests.UpdateRentalWithExtraRequest;
 import com.turkcell.rentacar.business.dtos.responses.CreatedRentalResponse;
 import com.turkcell.rentacar.business.dtos.responses.GotRentalResponse;
+import com.turkcell.rentacar.business.dtos.responses.UpdatedRentalResponse;
 import com.turkcell.rentacar.business.rules.CarBusinessRules;
 import com.turkcell.rentacar.business.rules.FindexBusinessRules;
 import com.turkcell.rentacar.business.rules.PaymentBusinessRules;
@@ -17,7 +19,6 @@ import com.turkcell.rentacar.entities.concretes.*;
 import com.turkcell.rentacar.entities.concretes.enums.CarStatus;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -45,6 +46,7 @@ public class RentalManager implements RentalService {
         carBusinessRules.carMustExists(rental.getCarId());
         carBusinessRules.carIsInMaintenance(rental.getCarId());
         carBusinessRules.carIsAlreadyRented(rental.getCarId());
+        rentalBusinessRules.calculateDailyPrice(modelMapperService.forRequest().map(rental, Rental.class));
         paymentBusinessRules.paymentMustConfirmed(rental.getCreditCardPaymentRequest());
         BusinessCustomer businessCustomer = modelMapperService.forResponse()
                 .map(businessCustomerService.getById(rental.getCustomerId()), BusinessCustomer.class);
@@ -56,6 +58,10 @@ public class RentalManager implements RentalService {
         carBusinessRules.carMustExists(rental.getCarId());
         carBusinessRules.carIsInMaintenance(rental.getCarId());
         carBusinessRules.carIsAlreadyRented(rental.getCarId());
+        double rentalPrice = rentalBusinessRules.calculateDailyPrice(modelMapperService.forRequest().map(rental, Rental.class));
+        CreditCardPaymentRequest paymentRequest = rental.getCreditCardPaymentRequest();
+        paymentRequest.setAmount(rentalPrice);
+        rental.setCreditCardPaymentRequest(paymentRequest);
         paymentBusinessRules.paymentMustConfirmed(rental.getCreditCardPaymentRequest());
         IndividualCustomer individualCustomer = modelMapperService.forResponse()
                 .map(individualCustomerService.getById(rental.getCustomerId()), IndividualCustomer.class);
@@ -65,7 +71,7 @@ public class RentalManager implements RentalService {
     private CreatedRentalResponse getCreatedRentalResponse(CreateRentalRequest rental, String identityNo, Customer customer) {
 //        Car car = modelMapperService.forResponse()
 //                .map(carService.getById(rental.getCarId()), Car.class);
-        ModelMapper modelMapper = new ModelMapper(); //upper method assignes "createDate" variable to all dates.
+        ModelMapper modelMapper = new ModelMapper(); //upper method assignes "createDate" variable to all dates. todo: tekrar bakılacak
         Car car = modelMapper.map(carService.getById(rental.getCarId()), Car.class);
         findexBusinessRules.findexScoreMustEnough(identityNo, car.getModel().getRequiredFindexScore());
         Rental dbRental = modelMapperService.forRequest().map(rental, Rental.class);
@@ -77,18 +83,17 @@ public class RentalManager implements RentalService {
         dbRental.setDateReturned(rental.getReturnDate());
         dbRental.setCustomer(customer);
         if (rental.getExtras() != null) {
-            List<RentalExtras> extras = rental.getExtras().stream()
-                    .map(extra -> {
-                        RentalExtras rentalExtra = modelMapperService.forRequest().map(extra, RentalExtras.class);
-                        rentalExtra.setRental(dbRental);
-                        rentalExtra.setCreateDate(LocalDateTime.now());
-                        return rentalExtra;
-                    })
-                    .collect(Collectors.toList());
-            dbRental.setExtras(extras);
+            addExtrasToRental(dbRental, rental.getExtras());
         }
 
         CreatedRentalResponse createdRental = modelMapperService.forResponse().map(rentalRepository.save(dbRental), CreatedRentalResponse.class);
+        rental.setCreditCardPaymentRequest(createdRental.getExtras().stream().map(
+                extra -> {
+                    CreditCardPaymentRequest paymentRequest = rental.getCreditCardPaymentRequest();
+                    paymentRequest.setAmount(paymentRequest.getAmount() + extra.getPrice());
+                    return paymentRequest;
+                }
+        ).toList().get(0));
         paymentService.add(dbRental, rental.getCreditCardPaymentRequest().getAmount());
         return createdRental;
 
@@ -101,10 +106,16 @@ public class RentalManager implements RentalService {
     }
 
     @Override
-    public Rental updateRentalWithExtras(UpdateRentalWithExtraRequest extraRequest) {
+    public UpdatedRentalResponse updateRentalWithExtras(UpdateRentalWithExtraRequest extraRequest) {
         rentalBusinessRules.rentalMustExists(extraRequest.getRentalId());
-        Rental rental = modelMapperService.forRequest().map(this.getById(extraRequest.getRentalId()), Rental.class); //todo: sorunlu
-        List<RentalExtras> extrasList = extraRequest.getExtras().stream().map(
+        Rental rental = rentalRepository.findById(extraRequest.getRentalId()).orElse(null);
+        addExtrasToRental(rental, extraRequest.getExtras());
+        rental.setUpdateDate(LocalDateTime.now());
+        return modelMapperService.forResponse().map(rentalRepository.save(rental), UpdatedRentalResponse.class);
+    }
+
+    private void addExtrasToRental(Rental rental, List<CreateRentalExtraWithRentalRequest> extras) {
+        List<RentalExtras> extrasList = extras.stream().map(
                 extra -> {
                     RentalExtras rentalExtra = modelMapperService.forRequest().map(extra, RentalExtras.class);
                     rentalExtra.setRental(rental);
@@ -113,7 +124,5 @@ public class RentalManager implements RentalService {
                 }
         ).collect(Collectors.toList());
         rental.setExtras(extrasList);
-        rental.setUpdateDate(LocalDateTime.now());
-        return rentalRepository.save(rental);
     }
 }

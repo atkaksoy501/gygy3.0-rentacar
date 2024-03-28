@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,4 +25,6 @@ public class CreatedRentalResponse {
     private Customer customer;
 
     private LocalDateTime createDate;
+
+    private List<GetRentalExtrasResponse> extras;
 }

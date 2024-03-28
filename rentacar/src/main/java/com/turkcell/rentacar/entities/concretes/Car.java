@@ -28,7 +28,7 @@ public class Car extends BaseEntity {
 
     private String plate;
 
-    private double dailyPrice;
+    private double dailyPrice; // todo: rental fiyatı bu fiyattan hesaplanacak
 
     @OneToMany(mappedBy = "car")
     private List<Maintenance> maintenances;
