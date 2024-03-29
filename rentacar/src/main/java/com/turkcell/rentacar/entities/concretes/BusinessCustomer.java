@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "businessCustomers")
 public class BusinessCustomer extends Customer {
-    @NotNull
     @Size(min = 2, max = 50)
     private String companyName;
 }

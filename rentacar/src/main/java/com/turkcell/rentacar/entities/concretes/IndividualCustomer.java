@@ -17,15 +17,12 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "individualCustomers")
 public class IndividualCustomer extends Customer {
-    @NotNull
     @Size(min = 2, max = 20)
     private String firstName;
 
-    @NotNull
     @Size(min = 2, max = 20)
     private String lastName;
 
-    @NotNull
     private LocalDate birthDate;
 
 }
