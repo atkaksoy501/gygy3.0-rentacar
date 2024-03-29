@@ -17,9 +17,9 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @SequenceGenerator(
-        name = "base_sequence",
-        sequenceName = "customer_sequence",
-        allocationSize = 1
+        name = "base_sequence_generator", //generator name
+        sequenceName = "customer_sequence", //this entity's sequence name
+        allocationSize = 1 //increment size
 )
 public class Customer extends BaseEntity{
 

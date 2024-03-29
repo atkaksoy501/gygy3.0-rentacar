@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "extras")
 @SequenceGenerator(
-        name = "base_sequence",
+        name = "base_sequence_generator",
         sequenceName = "rental_extra_sequence",
         allocationSize = 1
 )

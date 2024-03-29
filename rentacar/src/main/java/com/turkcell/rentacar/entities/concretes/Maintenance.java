@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "maintenances")
 @SequenceGenerator(
-        name = "base_sequence",
+        name = "base_sequence_generator",
         sequenceName = "maintenance_sequence",
         allocationSize = 1
 )

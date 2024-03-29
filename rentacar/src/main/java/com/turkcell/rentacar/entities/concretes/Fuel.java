@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "fuels")
 @SequenceGenerator(
-        name = "base_sequence",
+        name = "base_sequence_generator",
         sequenceName = "fuel_sequence",
         allocationSize = 1
 )

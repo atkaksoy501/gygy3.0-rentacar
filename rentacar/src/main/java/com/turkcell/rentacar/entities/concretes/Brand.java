@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "brands")
 @SequenceGenerator(
-        name = "base_sequence",
+        name = "base_sequence_generator",
         sequenceName = "brand_sequence",
         allocationSize = 1
 )
