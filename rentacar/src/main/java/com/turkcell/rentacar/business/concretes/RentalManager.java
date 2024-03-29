@@ -47,9 +47,9 @@ public class RentalManager implements RentalService {
     }
 
     private void calculateAndConfirmTotalPayment(CreateRentalRequest rental) {
-        Rental rental1 = modelMapperService.forResponse().map(rental, Rental.class);
-        rental1.setDateRented(LocalDateTime.now());
-        double rentalPrice = rentalBusinessRules.calculateDailyPrice(rental1);
+        Rental dbRental = modelMapperService.forResponse().map(rental, Rental.class);
+        dbRental.setDateRented(LocalDateTime.now());
+        double rentalPrice = rentalBusinessRules.calculateDailyPrice(dbRental);
         CreditCardPaymentRequest paymentRequest = rental.getCreditCardPaymentRequest();
         paymentRequest.setAmount(rentalPrice);
         rental.setCreditCardPaymentRequest(paymentRequest);
