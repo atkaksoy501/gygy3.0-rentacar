@@ -11,6 +11,11 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "payments")
+@SequenceGenerator(
+        name = "base_sequence",
+        sequenceName = "payment_sequence",
+        allocationSize = 1
+)
 public class Payment extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "rental_id", referencedColumnName = "id")

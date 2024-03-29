@@ -13,6 +13,11 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "fuels")
+@SequenceGenerator(
+        name = "base_sequence",
+        sequenceName = "fuel_sequence",
+        allocationSize = 1
+)
 public class Fuel extends BaseEntity {
     @Column(name = "name")
     private String name;

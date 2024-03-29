@@ -49,4 +49,9 @@ public class MaintenanceManager implements MaintenanceService {
     }
 
     //todo: returnCarFromMaintenance method oluşturulacak
+
+    //rental
+    //maintenance
+    //findex
+    //payment
 }

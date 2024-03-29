@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+import static jakarta.persistence.GenerationType.SEQUENCE;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -13,7 +15,10 @@ import java.time.LocalDateTime;
 public class BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "base_sequence"
+    )
     @Column(name = "id")
     private int id;
 

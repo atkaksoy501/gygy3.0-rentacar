@@ -17,6 +17,11 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "rentals")
+@SequenceGenerator(
+        name = "base_sequence",
+        sequenceName = "rental_sequence",
+        allocationSize = 1
+)
 public class Rental extends BaseEntity {
 
     private LocalDateTime dateRented;

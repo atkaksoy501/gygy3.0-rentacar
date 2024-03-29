@@ -14,6 +14,11 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "cars")
+@SequenceGenerator(
+        name = "base_sequence",
+        sequenceName = "car_sequence",
+        allocationSize = 1
+)
 public class Car extends BaseEntity {
 
     @ManyToOne

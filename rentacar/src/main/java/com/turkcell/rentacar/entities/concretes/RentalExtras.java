@@ -1,10 +1,7 @@
 package com.turkcell.rentacar.entities.concretes;
 
 import com.turkcell.rentacar.core.entities.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +11,11 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "extras")
+@SequenceGenerator(
+        name = "base_sequence",
+        sequenceName = "rental_extra_sequence",
+        allocationSize = 1
+)
 public class RentalExtras extends BaseEntity {
     private String name;
     private double price;

@@ -16,6 +16,11 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "models")
+@SequenceGenerator(
+        name = "base_sequence",
+        sequenceName = "model_sequence",
+        allocationSize = 1
+)
 public class Model extends BaseEntity {
     @Column(name = "name")
     private String name;
