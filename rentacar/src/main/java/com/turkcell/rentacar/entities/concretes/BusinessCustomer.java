@@ -1,6 +1,7 @@
 package com.turkcell.rentacar.entities.concretes;
 
 import com.turkcell.rentacar.core.entities.Customer;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +16,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "businessCustomers")
 public class BusinessCustomer extends Customer {
-    @Size(min = 2, max = 50)
+    @Column(name = "company_name")
     private String companyName;
 }

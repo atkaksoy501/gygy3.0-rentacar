@@ -26,6 +26,6 @@ public class Customer extends BaseEntity{
     @OneToMany(mappedBy = "customer")
     private List<Rental> rentals;
 
-    @Column(name = "identityNo")
+    @Column(name = "identity_no")
     private String identityNo;
 }

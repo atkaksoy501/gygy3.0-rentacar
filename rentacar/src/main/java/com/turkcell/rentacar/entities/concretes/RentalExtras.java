@@ -17,7 +17,10 @@ import lombok.NoArgsConstructor;
         allocationSize = 1
 )
 public class RentalExtras extends BaseEntity {
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "price")
     private double price;
 
     @ManyToOne

@@ -26,21 +26,21 @@ public class Model extends BaseEntity {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "brandId")
+    @JoinColumn(name = "brand_id")
     private Brand brand;
 
     @ManyToOne
-    @JoinColumn(name = "fuelId")
+    @JoinColumn(name = "fuel_id")
     private Fuel fuel;
 
     @ManyToOne
-    @JoinColumn(name = "transmissionId")
+    @JoinColumn(name = "transmission_id")
     private Transmission transmission;
 
     @OneToMany(mappedBy = "model")
     private List<Car> cars;
 
-    @Column(name = "requiredFindexScore")
+    @Column(name = "required_findex_score")
     private int requiredFindexScore;
 
 

@@ -1,6 +1,7 @@
 package com.turkcell.rentacar.entities.concretes;
 
 import com.turkcell.rentacar.core.entities.Customer;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -17,12 +18,13 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "individualCustomers")
 public class IndividualCustomer extends Customer {
-    @Size(min = 2, max = 20)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Size(min = 2, max = 20)
+    @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "birth_date")
     private LocalDate birthDate;
 
 }

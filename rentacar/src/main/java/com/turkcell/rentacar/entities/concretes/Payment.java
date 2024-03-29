@@ -20,5 +20,7 @@ public class Payment extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "rental_id", referencedColumnName = "id")
     private Rental rental;
+
+    @Column(name = "amount")
     private double amount;
 }

@@ -21,11 +21,13 @@ import java.time.LocalDateTime;
         allocationSize = 1
 )
 public class Maintenance extends BaseEntity {
+    @Column(name = "date_sent")
     private LocalDateTime dateSent;
 
+    @Column(name = "date_returned")
     private LocalDateTime dateReturned;
 
     @ManyToOne
-    @JoinColumn(name="carId")
+    @JoinColumn(name="car_id")
     private Car car;
 }

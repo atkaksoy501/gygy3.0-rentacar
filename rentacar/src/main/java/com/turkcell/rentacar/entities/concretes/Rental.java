@@ -23,17 +23,18 @@ import java.util.List;
         allocationSize = 1
 )
 public class Rental extends BaseEntity {
-
+    @Column(name = "date_rented")
     private LocalDateTime dateRented;
 
+    @Column(name = "date_returned")
     private LocalDate dateReturned;
 
     @ManyToOne
-    @JoinColumn(name="carId")
+    @JoinColumn(name="car_id")
     private Car car;
 
     @ManyToOne
-    @JoinColumn(name="customerId")
+    @JoinColumn(name="customer_id")
     private Customer customer;
 
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)

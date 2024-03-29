@@ -22,17 +22,22 @@ import java.util.List;
 public class Car extends BaseEntity {
 
     @ManyToOne
-    @JoinColumn(name = "modelId")
+    @JoinColumn(name = "model_id")
     private Model model;
 
+    @Column(name = "status")
     private CarStatus status;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "model_year")
     private int modelYear;
 
+    @Column(name = "plate")
     private String plate;
 
+    @Column(name = "daily_price")
     private double dailyPrice;
 
     @OneToMany(mappedBy = "car")
