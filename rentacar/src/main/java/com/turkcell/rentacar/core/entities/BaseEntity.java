@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-import static jakarta.persistence.GenerationType.SEQUENCE;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -16,7 +14,7 @@ public class BaseEntity {
 
     @Id
     @GeneratedValue(
-            strategy = SEQUENCE,
+            strategy = GenerationType.SEQUENCE,
             generator = "base_sequence_generator" //generator name
     )
     @Column(name = "id")
