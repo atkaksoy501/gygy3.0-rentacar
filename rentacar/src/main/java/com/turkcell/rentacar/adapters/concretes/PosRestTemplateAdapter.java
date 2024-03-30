@@ -17,6 +17,8 @@ public class PosRestTemplateAdapter implements PosHttpAdapter {
     public CreditCardPaymentResponse sendPostRequest(String url, CreditCardPaymentRequest requestBody) {
         ResponseEntity<CreditCardPaymentResponse> response =
                 restTemplate.postForEntity(url, requestBody, CreditCardPaymentResponse.class);
+        // postForEntity -> tüm response'u almak için (header, body, status)
+        // postForObject -> sadece response'un body'sini almak için
         return response.getBody();
     }
 }

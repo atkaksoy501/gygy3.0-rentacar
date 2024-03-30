@@ -3,7 +3,7 @@ server:
 spring:
     datasource:
         driver-class-name: org.postgresql.Driver
-        url: jdbc:postgresql://localhost:5432/rentacargy2
+        url: jdbc:postgresql://localhost:5432/java2
         username: postgres
         password: 12345
     jpa:
@@ -12,3 +12,7 @@ spring:
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
+jwt:
+    secret:
+        key: 97z1qGFYhUz9jtKaF6OTCpkJevWPnULxkF8bhRd1pMXPOkFtB0DcJMFRN12cw0ZsT4p6HA/z2NnlYMwyCTVkXIT9H09okIZpMrpNBd5b+6BMHPErJHuOj88ko2xiGvchNUaFTGueFXr5qzMzMNIZds7a4QgYMXjnK7LpRi+gJJBXiszT6MMWmfkxERim2WoZ/AFd6ol3RS7iwj2q7lhNDJJXT6JRI54kjyCULvkgGkZXNNPBchsS/Gq3Jvdz9GFasLBXw1esGQVzPEOEZhJGDE9pjCO/622ktwUQPTdLbDAw+0Wa1GrcJGigR1fS2LnDxw3+/5M9Gvf+baVb0TUwh/J7ynd9fiK6ODO3VT9xmpw=,
+        expiration: 600000

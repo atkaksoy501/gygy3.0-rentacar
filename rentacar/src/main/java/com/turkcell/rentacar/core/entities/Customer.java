@@ -5,8 +5,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
@@ -21,11 +26,45 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
         sequenceName = "customer_sequence", //this entity's sequence name
         allocationSize = 1 //increment size
 )
-public class Customer extends BaseEntity{
+public class Customer extends BaseEntity implements UserDetails {
 
     @OneToMany(mappedBy = "customer")
     private List<Rental> rentals;
 
     @Column(name = "identity_no")
     private String identityNo;
+
+    private String email;
+
+    private String password;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
