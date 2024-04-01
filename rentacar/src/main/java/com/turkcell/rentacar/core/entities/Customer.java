@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
@@ -38,10 +39,13 @@ public class Customer extends BaseEntity implements UserDetails {
 
     private String password;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="user_roles",
+            joinColumns = @JoinColumn(name="customer_id"),
+            inverseJoinColumns = @JoinColumn(name="role_id"))
+    private Set<Role> authorities;
+
 
     @Override
     public String getUsername() {
